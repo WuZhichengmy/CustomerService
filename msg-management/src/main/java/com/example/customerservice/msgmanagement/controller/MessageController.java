@@ -19,7 +19,6 @@ public class MessageController {
 
     @PostMapping
     public ReturnObject insertMsgRecord(@RequestBody MessageVo messageVo){
-        System.out.println("aaa"+messageVo);
         this.messageService.insertMsgRecord(messageVo.getType(), messageVo.getContent(), messageVo.getSenderId(), messageVo.getReceiverId(),
                 messageVo.getConversationId());
         return new ReturnObject(ReturnNo.OK);
