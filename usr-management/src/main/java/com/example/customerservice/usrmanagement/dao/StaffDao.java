@@ -1,6 +1,7 @@
-package com.example.customerservicesystem.dao;
+package com.example.customerservice.usrmanagement.dao;
 
-import com.example.customerservicesystem.mapper.StaffPoMapper;
+
+import com.example.customerservice.usrmanagement.mapper.StaffPoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

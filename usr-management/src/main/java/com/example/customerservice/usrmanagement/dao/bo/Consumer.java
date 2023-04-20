@@ -1,7 +1,5 @@
-package com.example.customerservicesystem.dao.bo;
+package com.example.customerservice.usrmanagement.dao.bo;
 
-import com.example.customerservicesystem.dao.ConversationDao;
-import com.example.customerservicesystem.dao.MessageDao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -14,11 +12,10 @@ import java.util.List;
 public class Consumer {
 
     @Builder
-    public Consumer(Long id, String username, Byte priority, List<Conversation> conversationList) {
+    public Consumer(Long id, String username, Byte priority) {
         this.id = id;
         this.username = username;
         this.priority = priority;
-        this.conversationList = conversationList;
     }
 
     @Getter
@@ -30,17 +27,5 @@ public class Consumer {
     @Getter
     @Setter
     private Byte priority;
-
-    @Setter
-    private List<Conversation> conversationList;
-
-    @Setter
-    @JsonIgnore
-    private ConversationDao conversationDao;
-
-    public List<Conversation> getConversationList() {
-        conversationList = conversationDao.findByConsumerId(id);
-        return conversationList;
-    }
 
 }

@@ -1,7 +1,6 @@
-package com.example.customerservicesystem.service;
+package com.example.customerservice.usrmanagement.service;
 
-import com.example.customerservicesystem.dao.ConsumerDao;
-import com.example.customerservicesystem.dao.MessageDao;
+import com.example.customerservice.usrmanagement.dao.ConsumerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,8 @@ public class ConsumerService {
 
     private ConsumerDao consumerDao;
 
-    private MessageDao messageDao;
-
     @Autowired
-    public ConsumerService(ConsumerDao consumerDao, MessageDao messageDao) {
+    public ConsumerService(ConsumerDao consumerDao) {
         this.consumerDao = consumerDao;
-        this.messageDao = messageDao;
     }
 }

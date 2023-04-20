@@ -1,6 +1,6 @@
-package com.example.customerservicesystem.mapper;
+package com.example.customerservice.msgmanagement.mapper;
 
-import com.example.customerservicesystem.mapper.po.MessagePo;
+import com.example.customerservice.msgmanagement.mapper.po.MessagePo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

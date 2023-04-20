@@ -1,6 +1,6 @@
-package com.example.customerservicesystem.dao.bo;
+package com.example.customerservice.msgmanagement.dao.bo;
 
-import com.example.customerservicesystem.dao.MessageDao;
+import com.example.customerservice.msgmanagement.dao.MessageDao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -13,12 +13,13 @@ import java.util.List;
 public class Conversation {
 
     @Builder
-    public Conversation(Long id, Long consumerId, Long staffId, List<Message> messageList, MessageDao messageDao) {
+    public Conversation(Long id, Long consumerId, Long staffId, List<Message> messageList, MessageDao messageDao, Byte status) {
         this.id = id;
         this.consumerId = consumerId;
         this.staffId = staffId;
         this.messageList = messageList;
         this.messageDao = messageDao;
+        this.status = status;
     }
 
     @Getter
@@ -29,6 +30,10 @@ public class Conversation {
 
     @Getter
     private Long staffId;
+
+    @Getter
+    @Setter
+    private Byte status;
 
     @Setter
     private List<Message> messageList;

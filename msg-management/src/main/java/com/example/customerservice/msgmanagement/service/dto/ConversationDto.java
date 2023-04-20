@@ -1,4 +1,4 @@
-package com.example.customerservicesystem.service.dto;
+package com.example.customerservice.msgmanagement.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 public class ConversationDto {
 
     @Builder
-    public ConversationDto(Long id, Long consumerId, Long staffId, String consumerName, String staffName) {
+    public ConversationDto(Long id, Long consumerId, Long staffId, Byte status) {
         this.id = id;
         this.consumerId = consumerId;
         this.staffId = staffId;
-        this.consumerName = consumerName;
-        this.staffName = staffName;
+        this.status = status;
     }
 
     private Long id;
@@ -25,7 +24,5 @@ public class ConversationDto {
 
     private Long staffId;
 
-    private String consumerName;
-
-    private String staffName;
+    private Byte status;
 }

@@ -1,6 +1,6 @@
-package com.example.customerservicesystem.controller;
+package com.example.customerservice.usrmanagement.controller;
 
-import com.example.customerservicesystem.service.StaffService;
+import com.example.customerservice.usrmanagement.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

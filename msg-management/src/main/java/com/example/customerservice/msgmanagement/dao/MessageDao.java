@@ -1,8 +1,9 @@
-package com.example.customerservicesystem.dao;
+package com.example.customerservice.msgmanagement.dao;
 
-import com.example.customerservicesystem.dao.bo.Message;
-import com.example.customerservicesystem.mapper.MessagePoMapper;
-import com.example.customerservicesystem.mapper.po.MessagePo;
+
+import com.example.customerservice.msgmanagement.dao.bo.Message;
+import com.example.customerservice.msgmanagement.mapper.MessagePoMapper;
+import com.example.customerservice.msgmanagement.mapper.po.MessagePo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +27,11 @@ public class MessageDao {
                     .conversationId(o.getConversationId()).type(o.getType()).content(o.getContent()).build();
         }).collect(Collectors.toList());
         return messageList;
+    }
+
+    public void insertMsgRecord(Message msg){
+        MessagePo messagePo = MessagePo.builder().type(msg.getType()).content(msg.getContent()).senderId(msg.getSenderId()).rcvId(msg.getRcvId())
+                .conversationId(msg.getConversationId()).time(msg.getTime()).build();
+        this.messagePoMapper.save(messagePo);
     }
 }

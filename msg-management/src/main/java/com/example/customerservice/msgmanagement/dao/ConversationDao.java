@@ -1,8 +1,9 @@
-package com.example.customerservicesystem.dao;
+package com.example.customerservice.msgmanagement.dao;
 
-import com.example.customerservicesystem.dao.bo.Conversation;
-import com.example.customerservicesystem.mapper.ConversationPoMapper;
-import com.example.customerservicesystem.mapper.po.ConversationPo;
+
+import com.example.customerservice.msgmanagement.dao.bo.Conversation;
+import com.example.customerservice.msgmanagement.mapper.ConversationPoMapper;
+import com.example.customerservice.msgmanagement.mapper.po.ConversationPo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,23 +27,4 @@ public class ConversationDao {
         conversation.setMessageDao(messageDao);
     }
 
-    public List<Conversation> findByConsumerId(Long consumerId){
-        List<ConversationPo> byConsumerId = this.conversationPoMapper.findByConsumerId(consumerId);
-        List<Conversation> collect = byConsumerId.stream().map(o -> {
-            Conversation build = Conversation.builder().id(o.getId()).consumerId(o.getConsumerId()).staffId(o.getStaffId()).build();
-            setBo(build);
-            return build;
-        }).collect(Collectors.toList());
-        return collect;
-    }
-
-    public List<Conversation> findByStaffId(Long staffId){
-        List<ConversationPo> byConsumerId = this.conversationPoMapper.findByStaffId(staffId);
-        List<Conversation> collect = byConsumerId.stream().map(o -> {
-            Conversation build = Conversation.builder().id(o.getId()).consumerId(o.getConsumerId()).staffId(o.getStaffId()).build();
-            setBo(build);
-            return build;
-        }).collect(Collectors.toList());
-        return collect;
-    }
 }

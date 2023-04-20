@@ -1,7 +1,10 @@
-package com.example.customerservicesystem.dao.bo;
+package com.example.customerservice.msgmanagement.dao.bo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 

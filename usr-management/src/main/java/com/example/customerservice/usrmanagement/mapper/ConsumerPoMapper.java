@@ -1,6 +1,6 @@
-package com.example.customerservicesystem.mapper;
+package com.example.customerservice.usrmanagement.mapper;
 
-import com.example.customerservicesystem.mapper.po.ConsumerPo;
+import com.example.customerservice.usrmanagement.mapper.po.ConsumerPo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,7 @@
-package com.example.customerservicesystem.mapper.po;
+package com.example.customerservice.msgmanagement.mapper.po;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 @Data
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 public class MessagePo {
 
@@ -22,11 +24,14 @@ public class MessagePo {
 
     private String content;
 
+    @Column(name = "sender_id")
     private Long senderId;
 
+    @Column(name = "receiver_id")
     private Long rcvId;
 
     private LocalDateTime time;
 
+    @Column(name = "conversation_id")
     private Long conversationId;
 }

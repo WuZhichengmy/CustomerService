@@ -1,4 +1,4 @@
-package com.example.customerservicesystem.service.dto;
+package com.example.customerservice.msgmanagement.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

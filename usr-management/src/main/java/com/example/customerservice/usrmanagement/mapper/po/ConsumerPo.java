@@ -1,4 +1,4 @@
-package com.example.customerservicesystem.mapper.po;
+package com.example.customerservice.usrmanagement.mapper.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
