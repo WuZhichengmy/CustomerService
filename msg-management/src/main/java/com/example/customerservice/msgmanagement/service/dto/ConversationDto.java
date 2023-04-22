@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 public class ConversationDto {
 
     @Builder
-    public ConversationDto(Long id, Long consumerId, Long staffId, Byte status) {
+    public ConversationDto(Long id, String customerId, String staffId, Byte status) {
         this.id = id;
-        this.consumerId = consumerId;
+        this.customerId = customerId;
         this.staffId = staffId;
         this.status = status;
     }
 
     private Long id;
 
-    private Long consumerId;
+    private String customerId;
 
-    private Long staffId;
+    private String staffId;
 
     private Byte status;
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MessageVo {
     Byte type;
     String content;
-    Long senderId;
-    Long receiverId;
+    String senderId;
+    String receiverId;
     Long conversationId;
 }

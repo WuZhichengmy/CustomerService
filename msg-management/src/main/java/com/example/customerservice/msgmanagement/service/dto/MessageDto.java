@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class MessageDto {
 
     @Builder
-    public MessageDto(Long id, Byte type, String content, Long senderId, Long rcvId, LocalDateTime time, Long conversationId) {
+    public MessageDto(Long id, Byte type, String content, String senderId, String rcvId, LocalDateTime time, Long conversationId) {
         this.id = id;
         this.type = type;
         this.content = content;
@@ -29,9 +29,9 @@ public class MessageDto {
 
     private String content;
 
-    private Long senderId;
+    private String senderId;
 
-    private Long rcvId;
+    private String rcvId;
 
     private LocalDateTime time;
 

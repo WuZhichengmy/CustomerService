@@ -25,7 +25,7 @@ public class MessageControllerTest {
 
     @Test
     public void insertMsgRecordTest() throws Exception {
-        MessageVo messageVo = MessageVo.builder().type((byte) 1).senderId(1L).receiverId(1L).content("test").conversationId(1L).build();
+        MessageVo messageVo = MessageVo.builder().type((byte) 1).senderId(String.valueOf(1L)).receiverId(String.valueOf(1L)).content("test").conversationId(1L).build();
         String s = JacksonUtil.toJson(messageVo);
         this.mockMvc.perform(MockMvcRequestBuilders.post(MESSAGE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)

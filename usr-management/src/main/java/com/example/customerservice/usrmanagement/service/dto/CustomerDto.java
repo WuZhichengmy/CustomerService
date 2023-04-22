@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
-public class ConsumerDto {
+public class CustomerDto {
 
     @Builder
-    public ConsumerDto(Long id, String username, Byte priority) {
+    public CustomerDto(String id, String username, Byte priority) {
         this.id = id;
         this.username = username;
         this.priority = priority;
     }
 
-    private Long id;
+    private String id;
 
     private String username;
 

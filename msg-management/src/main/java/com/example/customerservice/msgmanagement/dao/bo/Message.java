@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Builder
-    public Message(Long id, Byte type, String content, Long senderId, Long rcvId, LocalDateTime time, Long conversationId) {
+    public Message(Long id, Byte type, String content, String senderId, String rcvId, LocalDateTime time, Long conversationId) {
         this.id = id;
         this.type = type;
         this.content = content;
@@ -34,10 +34,10 @@ public class Message {
     private String content;
 
     @Getter
-    private Long senderId;
+    private String senderId;
 
     @Getter
-    private Long rcvId;
+    private String rcvId;
 
     @Getter
     private LocalDateTime time;

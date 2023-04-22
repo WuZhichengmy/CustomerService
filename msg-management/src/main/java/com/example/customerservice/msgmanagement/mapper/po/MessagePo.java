@@ -25,10 +25,10 @@ public class MessagePo {
     private String content;
 
     @Column(name = "sender_id")
-    private Long senderId;
+    private String senderId;
 
     @Column(name = "receiver_id")
-    private Long rcvId;
+    private String rcvId;
 
     private LocalDateTime time;
 

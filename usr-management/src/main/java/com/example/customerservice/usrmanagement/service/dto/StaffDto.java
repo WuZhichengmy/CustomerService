@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class StaffDto {
 
     @Builder
-    public StaffDto(Long id, String username, Byte type, Integer conNum, Long shopId, Byte status) {
+    public StaffDto(String id, String username, Byte type, Integer conNum, Long shopId, Byte status) {
         this.id = id;
         this.username = username;
         this.type = type;
@@ -20,7 +20,7 @@ public class StaffDto {
         this.status = status;
     }
 
-    private Long id;
+    private String id;
 
     private String username;
 

@@ -18,10 +18,10 @@ public class ConversationPo {
     private Long id;
 
     @Column(name = "customer_id")
-    private Long consumerId;
+    private String customerId;
 
     @Column(name = "staff_id")
-    private Long staffId;
+    private String staffId;
 
     @Column(name = "state")
     private Byte status;

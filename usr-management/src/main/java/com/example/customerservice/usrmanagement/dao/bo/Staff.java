@@ -1,10 +1,7 @@
 package com.example.customerservice.usrmanagement.dao.bo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @ToString(callSuper = true)
@@ -12,7 +9,7 @@ import java.util.List;
 public class Staff {
 
     @Builder
-    public Staff(Long id, String username, Byte type, Integer conNum, Long shopId, Byte status) {
+    public Staff(String id, String username, Byte type, Integer conNum, Long shopId, Byte status) {
         this.id = id;
         this.username = username;
         this.type = type;
@@ -22,7 +19,7 @@ public class Staff {
     }
 
     @Getter
-    private Long id;
+    private String id;
 
     @Getter
     private String username;

@@ -13,9 +13,9 @@ import java.util.List;
 public class Conversation {
 
     @Builder
-    public Conversation(Long id, Long consumerId, Long staffId, List<Message> messageList, MessageDao messageDao, Byte status) {
+    public Conversation(Long id, String consumerId, String staffId, List<Message> messageList, MessageDao messageDao, Byte status) {
         this.id = id;
-        this.consumerId = consumerId;
+        this.customerId = consumerId;
         this.staffId = staffId;
         this.messageList = messageList;
         this.messageDao = messageDao;
@@ -26,10 +26,10 @@ public class Conversation {
     private Long id;
 
     @Getter
-    private Long consumerId;
+    private String customerId;
 
     @Getter
-    private Long staffId;
+    private String staffId;
 
     @Getter
     @Setter

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ConversationVo {
-    Long customerId;
-    Long staffId;
+    String customerId;
+    String staffId;
 }
