@@ -21,6 +21,7 @@ public class MessageControllerTest {
     private MockMvc mockMvc;
 
     private static final String MESSAGE = "/message";
+    private static final String SPEC_MESSAGE = "/message/{mid}";
 
 
     @Test
@@ -30,6 +31,20 @@ public class MessageControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post(MESSAGE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(s))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void deleteMsgRecordTest() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.delete(SPEC_MESSAGE, "200")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getMsgRecordTest() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get(SPEC_MESSAGE, "201")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
