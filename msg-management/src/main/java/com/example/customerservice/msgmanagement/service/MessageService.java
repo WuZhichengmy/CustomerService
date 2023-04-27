@@ -2,7 +2,7 @@ package com.example.customerservice.msgmanagement.service;
 
 import com.example.core.model.dto.PageDto;
 import com.example.customerservice.msgmanagement.dao.MessageDao;
-import com.example.customerservice.msgmanagement.dao.bo.Message;
+import com.example.customerservice.msgmanagement.dao.bo.InstMessage;
 import com.example.customerservice.msgmanagement.service.dto.MessageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class MessageService {
      * @param conversationId
      */
     public void insertMsgRecord(Byte type, String content, String senderId, String receiverId, Long conversationId){
-        Message msg = Message.builder().type(type).content(content).senderId(senderId).rcvId(receiverId).conversationId(conversationId).time(LocalDateTime.now())
+        InstMessage msg = InstMessage.builder().type(type).content(content).senderId(senderId).rcvId(receiverId).conversationId(conversationId).time(LocalDateTime.now())
                 .build();
         this.messageDao.insertMsgRecord(msg);
     }
@@ -49,7 +49,7 @@ public class MessageService {
      * @return
      */
     public MessageDto getMsgById(Long msgId) {
-        Message msg = this.messageDao.getMsgById(msgId);
+        InstMessage msg = this.messageDao.getMsgById(msgId);
         MessageDto messageDto = MessageDto.builder().id(msg.getId()).content(msg.getContent()).type(msg.getType()).senderId(msg.getSenderId())
                 .rcvId(msg.getRcvId()).time(msg.getTime()).conversationId(msg.getConversationId()).build();
         return messageDto;
@@ -63,10 +63,8 @@ public class MessageService {
      * @return
      */
     public PageDto<MessageDto> findMsgByConversationId(Long cid, Integer page, Integer pageSize) {
-        List<Message> messageList = this.messageDao.findByConversationIdPage(cid, page, pageSize);
-        System.out.println(cid);
-        System.out.println(messageList);
-        List<MessageDto> dtos = messageList.stream().map(o -> {
+        List<InstMessage> instMessageList = this.messageDao.findByConversationIdPage(cid, page, pageSize);
+        List<MessageDto> dtos = instMessageList.stream().map(o -> {
             MessageDto messageDto = MessageDto.builder().id(o.getId()).type(o.getType()).time(o.getTime()).content(o.getContent())
                     .senderId(o.getSenderId()).rcvId(o.getRcvId()).conversationId(o.getConversationId()).build();
             return messageDto;
