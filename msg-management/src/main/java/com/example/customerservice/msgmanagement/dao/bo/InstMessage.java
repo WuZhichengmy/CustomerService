@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Message {
+public class InstMessage {
 
     @Builder
-    public Message(Long id, Byte type, String content, String senderId, String rcvId, LocalDateTime time, Long conversationId) {
+    public InstMessage(Long id, Byte type, String content, String senderId, String rcvId, LocalDateTime time, Long conversationId) {
         this.id = id;
         this.type = type;
         this.content = content;
