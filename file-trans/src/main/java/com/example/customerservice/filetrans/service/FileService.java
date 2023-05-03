@@ -41,7 +41,7 @@ public class FileService {
         File dest = new File(uploadFilePath + '/' + fileMD5);
         file.transferTo(dest);
 
-        SimpleMessageDto messageDto = SimpleMessageDto.builder().senderId(senderId).rcvId(receiverId).type((byte) 1).content(JacksonUtil.toJson(SimpleFileDto.builder().fileName(fileName).md5(fileMD5)))
+        SimpleMessageDto messageDto = SimpleMessageDto.builder().senderId(senderId).rcvId(receiverId).type((byte) 1).content(JacksonUtil.toJson(SimpleFileDto.builder().fileName(fileName).md5(fileMD5).build()))
                 .conversationId(conversationId)
                 .time(LocalDateTime.now()).build();
 

@@ -36,7 +36,7 @@ public class MessageControllerTest {
 
     @Test
     public void deleteMsgRecordTest() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.delete(SPEC_MESSAGE, "200")
+        this.mockMvc.perform(MockMvcRequestBuilders.delete(SPEC_MESSAGE, "2013")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(MockMvcResultHandlers.print());
     }
