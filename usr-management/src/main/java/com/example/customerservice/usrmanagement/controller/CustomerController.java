@@ -1,14 +1,12 @@
 package com.example.customerservice.usrmanagement.controller;
 
+import com.example.core.model.ReturnNo;
 import com.example.core.model.ReturnObject;
 import com.example.core.model.dto.PageDto;
 import com.example.customerservice.usrmanagement.service.CustomerService;
 import com.example.customerservice.usrmanagement.service.dto.ConversationDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
@@ -36,5 +34,28 @@ public class CustomerController {
                                                    @RequestParam(defaultValue = "10") Integer pageSize ){
         PageDto<ConversationDto> conversationDtoPageDto = this.customerService.findConversationsByCustomerId(sid, page, pageSize);
         return new ReturnObject(conversationDtoPageDto);
+    }
+
+    /**
+     * 根据id查询顾客
+     * @param id
+     * @return: ReturnObject
+     */
+    @GetMapping("{id}")
+    public ReturnObject findCustomerById(@PathParam("id") Long id){
+        return new ReturnObject(this.customerService.findCustomerById(id));
+    }
+
+
+    /**
+     * 根据id修改顾客的优先级
+     * @param id
+     * @param priority
+     * @return: ReturnObject
+     */
+    @PutMapping("{id}/priority")
+    public ReturnObject putCustomerPriority(@PathParam("id") Long id,
+                                            @RequestParam(defaultValue = "0") Byte priority){
+        return this.customerService.putCustomerPriority(id, priority);
     }
 }
