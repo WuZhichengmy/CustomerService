@@ -19,18 +19,13 @@ import java.util.Map;
 @Component
 public class WebsocketHandler {
     private static Map<String, Session> sessionMap = new HashMap<>();
-
     private Session session;
-
     private String userId;
-
     private static MessageService messageService;
-
     @Autowired
     public void setMessageService(MessageService messageService) {
         WebsocketHandler.messageService = messageService;
     }
-
     @OnOpen
     public void onOpen(Session session, @PathParam("usrid") String userId){
         this.session=session;
@@ -40,7 +35,6 @@ public class WebsocketHandler {
         this.session.getAsyncRemote().sendText(userId+"已上线");
         System.out.println(userId);
     }
-
     @OnClose
     public void onClose(){
         sessionMap.remove(this.userId);

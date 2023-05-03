@@ -52,7 +52,7 @@ public class ConversionControllerTest {
     @Test
     public void testCloseConversation() throws Exception {
         // Given
-        Long cid = 101L;
+        Long cid = 104L;
 
         // When
         mockMvc.perform(put(BASE_URL + CID_URL + "/close", cid)
@@ -74,7 +74,7 @@ public class ConversionControllerTest {
     @Test
     public void testDeleteConversation() throws Exception {
         // Given
-        Long cid = 102L;
+        Long cid = 104L;
 
         // When
         mockMvc.perform(delete(BASE_URL + CID_URL, cid)
