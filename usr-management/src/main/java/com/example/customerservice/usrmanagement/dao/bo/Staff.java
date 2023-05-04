@@ -37,5 +37,5 @@ public class Staff {
 
     @Getter
     @Setter
-    private Byte status;
+    private Byte status;    //0-idle、1-busy
 }
