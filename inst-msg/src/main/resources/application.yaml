@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8084
   tomcat:
     uri-encoding: UTF-8
   servlet:
@@ -21,6 +21,16 @@ spring:
         file-extension: yaml
       discovery:
         server-addr: 1.12.51.41:8848
+  data:
+    redis:
+      repositories:
+        #forbid redis to scan repositories
+        enabled: false
+  redis:
+    host: 192.168.31.214
+    port: 6379
+    database: 0
+
 rocketmq:
   # 指定namesrv地址
   name-server: 192.168.31.214:9876

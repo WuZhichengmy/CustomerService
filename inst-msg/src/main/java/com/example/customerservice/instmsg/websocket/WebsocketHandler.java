@@ -1,9 +1,16 @@
 package com.example.customerservice.instmsg.websocket;
 
 import com.example.core.util.JacksonUtil;
+import com.example.core.util.RedisUtil;
+import com.example.customerservice.instmsg.config.ValueConfig;
 import com.example.customerservice.instmsg.service.MessageService;
 import com.example.customerservice.instmsg.service.dto.SimpleMessageDto;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -12,6 +19,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +30,24 @@ public class WebsocketHandler {
     private Session session;
     private String userId;
     private static MessageService messageService;
+
+    private RedisUtil redisUtil;
+
+    private RocketMQTemplate rocketMQTemplate;
+
+    private String instanceName;
+
+    private static ApplicationContext applicationContext;
+
+    public static void setApplicationContext(ApplicationContext applicationContext) {
+        WebsocketHandler.applicationContext = applicationContext;
+    }
+
     @Autowired
     public void setMessageService(MessageService messageService) {
         WebsocketHandler.messageService = messageService;
     }
+
     @OnOpen
     public void onOpen(Session session, @PathParam("usrid") String userId){
         this.session=session;
@@ -33,11 +55,21 @@ public class WebsocketHandler {
 
         sessionMap.put(userId, session);
         this.session.getAsyncRemote().sendText(userId+"已上线");
+
+        ValueConfig valueConfig = (ValueConfig) applicationContext.getBean(ValueConfig.class);
+        redisUtil = applicationContext.getBean(RedisUtil.class);
+        rocketMQTemplate = applicationContext.getBean(RocketMQTemplate.class);
+        instanceName = valueConfig.getInstanceName();
+
+        redisUtil.set(userId, instanceName, -1);
+        System.out.println(instanceName);
         System.out.println(userId);
     }
+
     @OnClose
     public void onClose(){
         sessionMap.remove(this.userId);
+        redisUtil.del(userId);
     }
 
     @OnMessage
@@ -46,9 +78,16 @@ public class WebsocketHandler {
         Session toSession = sessionMap.get(simpleMessageDto.getRcvId());
         if(simpleMessageDto.getType() == 0){
             // 文本消息
-            toSession.getAsyncRemote().sendText(message);
+            if(toSession != null){
+                // 在本地
+                toSession.getAsyncRemote().sendText(message);
+                messageService.insertMessage(simpleMessageDto);
+            } else {
+                Message<String> remoteMsg = MessageBuilder.withPayload(message).build();
+                String tag = (String) redisUtil.get(simpleMessageDto.getRcvId());
+                rocketMQTemplate.send("remotemsg:"+tag, remoteMsg);
+            }
             // 数据库操作
-            messageService.insertMessage(simpleMessageDto);
         } else {
             this.session.getAsyncRemote().sendText("error");
         }
