@@ -20,7 +20,9 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ServerEndpoint(value = "/websocket/{usrid}")
@@ -38,6 +40,12 @@ public class WebsocketHandler {
     private String instanceName;
 
     private static ApplicationContext applicationContext;
+
+    // 一批消息中消息的数量，用于实现消息的分批存入数据库
+    private static final Integer MESSAGE_COUNT = 10;
+
+    // 一批消息，用于实现消息的分批存入数据库
+    private List<SimpleMessageDto> messageDtos;
 
     public static void setApplicationContext(ApplicationContext applicationContext) {
         WebsocketHandler.applicationContext = applicationContext;
@@ -62,6 +70,9 @@ public class WebsocketHandler {
         instanceName = valueConfig.getInstanceName();
 
         redisUtil.set(userId, instanceName, -1);
+
+        messageDtos = new ArrayList<>();
+
         System.out.println(instanceName);
         System.out.println(userId);
     }
@@ -80,8 +91,17 @@ public class WebsocketHandler {
             // 文本消息
             if(toSession != null){
                 // 在本地
+                // 每接收一条消息就将其存入数据库
+//                toSession.getAsyncRemote().sendText(message);
+//                messageService.insertMessage(simpleMessageDto);
+                // 将消息分批存入数据库
+                messageDtos.add(simpleMessageDto);
                 toSession.getAsyncRemote().sendText(message);
-                messageService.insertMessage(simpleMessageDto);
+                if(messageDtos.size() == MESSAGE_COUNT) {
+                    // 达到制定数量，将消息存入数据库
+                    messageService.insertBatchMessages(messageDtos);
+                    messageDtos = new ArrayList<>();
+                }
             } else {
                 Message<String> remoteMsg = MessageBuilder.withPayload(message).build();
                 String tag = (String) redisUtil.get(simpleMessageDto.getRcvId());
