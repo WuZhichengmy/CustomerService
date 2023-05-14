@@ -20,6 +20,7 @@
         <module>inst-msg</module>
         <module>file-trans</module>
         <module>core</module>
+        <module>gateway</module>
     </modules>
     <properties>
         <java.version>11</java.version>
@@ -125,6 +126,20 @@
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
                 <version>3.0.1</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>3.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>2.4.13</version>
+            </dependency>
+
+
 
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
