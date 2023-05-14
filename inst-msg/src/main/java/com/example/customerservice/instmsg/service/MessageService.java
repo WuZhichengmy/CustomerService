@@ -8,6 +8,9 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MessageService {
 
@@ -22,5 +25,16 @@ public class MessageService {
         String toJson = JacksonUtil.toJson(simpleMessageDto);
         Message build = MessageBuilder.withPayload(toJson).build();
         rocketMQTemplate.send("insertmsg", build);
+    }
+
+    public void insertBatchMessages(List<SimpleMessageDto> list) {
+        List<Message> messages = new ArrayList<>();
+        list.forEach(o->{
+            String toJson = JacksonUtil.toJson(o);
+            Message build = MessageBuilder.withPayload(toJson).build();
+            messages.add(build);
+        });
+        System.out.println(list);
+        rocketMQTemplate.syncSend("insertmsg", messages);
     }
 }
