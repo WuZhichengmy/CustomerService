@@ -17,4 +17,10 @@ public class CustomerDaoTest {
         Customer testuser = Customer.builder().username("testuser").priority((byte) 1).build();
         customerDao.insertConsumer(testuser);
     }
+
+    @Test
+    public void getConsumerById(){
+        Customer bo = customerDao.getConsumerById("0527294a96364b3f2d06bc7ed9539d71");
+        System.out.println(bo);
+    }
 }

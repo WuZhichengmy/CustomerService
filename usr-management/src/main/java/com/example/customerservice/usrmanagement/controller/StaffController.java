@@ -42,7 +42,7 @@ public class StaffController {
      * @return: ReturnObject
      */
     @GetMapping("{id}")
-    public ReturnObject findStaffById(@PathParam("id") Long id){
+    public ReturnObject findStaffById(@PathParam("id") String id){
         return new ReturnObject(this.staffService.findStaffById(id));
     }
 
@@ -52,7 +52,7 @@ public class StaffController {
      * @return: ReturnObject
      */
     @PutMapping("{id}/idle")
-    public ReturnObject idleServiceStaff(@PathParam("id") Long id){
+    public ReturnObject idleServiceStaff(@PathParam("id") String id){
         return this.staffService.idleServiceStaff(id);
     }
 
@@ -62,7 +62,7 @@ public class StaffController {
      * @return: ReturnObject
      */
     @PutMapping("{id}/busy")
-    public ReturnObject busyServiceStaff(@PathParam("id") Long id){
+    public ReturnObject busyServiceStaff(@PathParam("id") String id){
         return this.staffService.busyServiceStaff(id);
     }
 
@@ -72,7 +72,7 @@ public class StaffController {
      * @return: ReturnObject
      */
     @GetMapping("{id}/conncnt")
-    public ReturnObject getStaffConnCnt(@PathParam("id") Long id){
+    public ReturnObject getStaffConnCnt(@PathParam("id") String id){
         return new ReturnObject(this.staffService.getStaffConnCnt(id));
     }
 
@@ -84,7 +84,7 @@ public class StaffController {
      * @Author: cjr
      */
     @PutMapping("{id}/conncnt")
-    public ReturnObject putStaffConnCnt(@PathParam("id") Long id,
+    public ReturnObject putStaffConnCnt(@PathParam("id") String id,
                                         @RequestParam(defaultValue = "0") Integer conncnt){
         return this.staffService.putStaffConnCnt(id, conncnt);
     }

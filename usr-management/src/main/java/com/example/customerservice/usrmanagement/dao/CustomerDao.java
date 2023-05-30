@@ -7,6 +7,8 @@ import com.example.customerservice.usrmanagement.dao.bo.Customer;
 import com.example.customerservice.usrmanagement.mapper.ConsumerPoMapper;
 import com.example.customerservice.usrmanagement.mapper.po.CustomerPo;
 import com.example.customerservice.usrmanagement.service.dto.StaffDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 
 @Repository
 public class CustomerDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerDao.class);
 
     private ConsumerPoMapper consumerPoMapper;
 
@@ -27,9 +31,8 @@ public class CustomerDao {
         this.consumerPoMapper.save(customerPo);
     }
 
-    //TODO:name not uniform, type not match
-    public Customer getConsumerById(Long id){
-        Optional<CustomerPo> po = consumerPoMapper.findById(id);
+    public Customer getConsumerById(String id){
+        Optional<CustomerPo> po = Optional.ofNullable(consumerPoMapper.findById(id));
         if(po.isPresent()){
             CustomerPo customerPo = po.get();
             Customer customer = Customer.builder().id(customerPo.getId()).username(customerPo.getUsername()).priority(customerPo.getPriority()).build();
@@ -38,10 +41,9 @@ public class CustomerDao {
         return new Customer();
     }
 
-    public ReturnObject putCustomerPriority(Long id, Byte priority){
-        Optional<CustomerPo> po = consumerPoMapper.findById(id);
-        if(po.isPresent()){
-            CustomerPo customerPo = po.get();
+    public ReturnObject putCustomerPriority(String id, Byte priority){
+        CustomerPo customerPo = consumerPoMapper.findById(id);
+        if(null != customerPo){
             customerPo.setPriority(priority);
             this.consumerPoMapper.save(customerPo);
             return new ReturnObject(ReturnNo.OK);

@@ -10,6 +10,8 @@ import com.example.customerservice.usrmanagement.mapper.po.CustomerPo;
 import com.example.customerservice.usrmanagement.mapper.po.StaffPo;
 import com.example.customerservice.usrmanagement.service.dto.ConnCntDto;
 import net.bytebuddy.asm.Advice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -18,10 +20,12 @@ import org.springframework.stereotype.Repository;
 import java.awt.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class StaffDao {
 
+    private static final Logger logger = LoggerFactory.getLogger(StaffDao.class);
     private StaffPoMapper staffPoMapper;
 
     @Autowired
@@ -34,7 +38,7 @@ public class StaffDao {
         this.staffPoMapper.save(staffPo);
     }
 
-    public Staff findStaffById(Long id){
+    public Staff findStaffById(String id){
         Optional<StaffPo> po = staffPoMapper.findById(id);
         if(po.isPresent()){
             StaffPo staffPo = po.get();
@@ -45,8 +49,9 @@ public class StaffDao {
         return new Staff();
     }
 
-    public ReturnObject putStaffStatus(Long id, Byte status){
+    public ReturnObject putStaffStatus(String id, Byte status){
         Optional<StaffPo> po = staffPoMapper.findById(id);
+        logger.debug("po: " + po.get().toString());
         if(po.isPresent()){
             StaffPo staffPo = po.get();
             staffPo.setStatus(status);
@@ -57,7 +62,7 @@ public class StaffDao {
         }
     }
 
-    public ConnCntDto getStaffConnCnt(Long id){
+    public ConnCntDto getStaffConnCnt(String id){
         Optional<StaffPo> po = staffPoMapper.findById(id);
         if(po.isPresent()){
             StaffPo staffPo = po.get();
@@ -67,7 +72,7 @@ public class StaffDao {
         }
     }
 
-    public ReturnObject putStaffConnCnt(Long id, Integer conncnt){
+    public ReturnObject putStaffConnCnt(String id, Integer conncnt){
         Optional<StaffPo> po = staffPoMapper.findById(id);
         if(po.isPresent()){
             StaffPo staffPo = po.get();
@@ -80,9 +85,8 @@ public class StaffDao {
     }
 
     public List<Staff> findStaffByIdAndShopIdAndTid(Long id, Long shopId, Long tid){
-//        StaffExample staffExample = new StaffExample();
-//        StaffExample.Criteria cri = staffExample.createCriteria();
-//        Optional<StaffPo> po = staffPoMapper.findAll(staffExample);
-        return null;
+        List<StaffPo> list = staffPoMapper.findByIdAndShopIdAndType(id, shopId, tid);
+        List<Staff> ret = list.stream().map(po->Staff.builder().id(po.getId()).username(po.getUsername()).conNum(po.getConNum()).status(po.getStatus()).type(po.getType()).shopId(po.getShopId()).build()).collect(Collectors.toList());
+        return ret;
     }
 }
