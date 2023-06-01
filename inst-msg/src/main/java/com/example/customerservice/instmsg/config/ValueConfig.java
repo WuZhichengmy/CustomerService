@@ -10,4 +10,10 @@ public class ValueConfig {
 
     @Value("${websocket.service.instance}")
     private String instanceName;
+
+    @Value("${websocket.service.batchmsg}")
+    private Boolean batchMsg;
+
+    @Value("${websocket.service.batchmsgcount}")
+    private Integer batchMsgCount;
 }

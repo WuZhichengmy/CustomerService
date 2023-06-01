@@ -13,7 +13,7 @@ spring:
         file-extension: yaml
       discovery:
         server-addr: 1.12.51.41:8848
-    #路由配置，user-service是我的服务名
+    #路由配置
     gateway:
       routes:
         #表示websocket的转发
