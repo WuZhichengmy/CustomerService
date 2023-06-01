@@ -66,4 +66,5 @@ public class CustomerController {
                                             @RequestParam(defaultValue = "0") Byte priority){
         return this.customerService.putCustomerPriority(id, priority);
     }
+
 }

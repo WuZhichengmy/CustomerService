@@ -34,7 +34,6 @@ public class MessageService {
             Message build = MessageBuilder.withPayload(toJson).build();
             messages.add(build);
         });
-        System.out.println(list);
         rocketMQTemplate.syncSend("insertmsg", messages);
     }
 }
