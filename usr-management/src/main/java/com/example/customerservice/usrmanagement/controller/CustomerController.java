@@ -34,7 +34,7 @@ public class CustomerController {
      * @return
      */
     @GetMapping("/{sid}/conversations")
-    public ReturnObject findConversationsByStaffId(@PathParam("sid") String sid,
+    public ReturnObject findConversationsByStaffId(@PathVariable("sid") String sid,
                                                    @RequestParam(defaultValue = "0") Integer page,
                                                    @RequestParam(defaultValue = "10") Integer pageSize ){
         PageDto<ConversationDto> conversationDtoPageDto = this.customerService.findConversationsByCustomerId(sid, page, pageSize);
@@ -47,7 +47,7 @@ public class CustomerController {
      * @return: ReturnObject
      */
     @GetMapping("/{id}")
-    public ReturnObject findCustomerById(@PathParam("id") String id){
+    public ReturnObject findCustomerById(@PathVariable("id") String id){
         System.out.println(id);
         CustomerDto dto = this.customerService.findCustomerById(id);
         logger.info("dto: " + dto.toString());
@@ -61,8 +61,8 @@ public class CustomerController {
      * @param priority
      * @return: ReturnObject
      */
-    @PutMapping("{id}/priority")
-    public ReturnObject putCustomerPriority(@PathParam("id") String id,
+    @PutMapping("/{id}/priority")
+    public ReturnObject putCustomerPriority(@PathVariable("id") String id,
                                             @RequestParam(defaultValue = "0") Byte priority){
         return this.customerService.putCustomerPriority(id, priority);
     }
