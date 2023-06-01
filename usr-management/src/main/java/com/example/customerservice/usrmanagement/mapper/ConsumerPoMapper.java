@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsumerPoMapper extends JpaRepository<CustomerPo, Long> {
+    public CustomerPo findById(String id);
 
 }

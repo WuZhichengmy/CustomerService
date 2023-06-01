@@ -39,26 +39,26 @@ public class StaffService {
         return conversationsByStaffId.getData();
     }
 
-    public StaffDto findStaffById(Long id){
+    public StaffDto findStaffById(String id){
         Staff bo = this.staffDao.findStaffById(id);
         StaffDto dto = StaffDto.builder().id(bo.getId()).username(bo.getUsername())
                 .type(bo.getType()).shopId(bo.getShopId()).conNum(bo.getConNum()).status(bo.getStatus()).build();
         return dto;
     }
 
-    public ReturnObject idleServiceStaff(Long id){
+    public ReturnObject idleServiceStaff(String id){
         return this.staffDao.putStaffStatus(id, (byte) 0);
     }
 
-    public ReturnObject busyServiceStaff(Long id){
+    public ReturnObject busyServiceStaff(String id){
         return this.staffDao.putStaffStatus(id, (byte) 1);
     }
 
-    public ReturnObject putStaffConnCnt(Long id, Integer conncnt){
+    public ReturnObject putStaffConnCnt(String id, Integer conncnt){
         return this.staffDao.putStaffConnCnt(id, conncnt);
     }
 
-    public ConnCntDto getStaffConnCnt(Long id){
+    public ConnCntDto getStaffConnCnt(String id){
         return this.staffDao.getStaffConnCnt(id);
     }
 }
