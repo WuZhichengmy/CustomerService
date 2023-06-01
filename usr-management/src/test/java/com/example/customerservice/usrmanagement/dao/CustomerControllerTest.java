@@ -24,11 +24,22 @@ public class CustomerControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    public void findConversationsByStaffId() throws Exception{
+        String id = "0527294a96364b3f2d06bc7ed9539d71";
+        String url = "/consumer/{sid}/conversations";
+        mockMvc.perform(MockMvcRequestBuilders.get(url,id)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data", is("Shao")))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
     public void findCustomerById() throws Exception{
         String id = "0527294a96364b3f2d06bc7ed9539d71";
-        String url = "/consumer/{id}";
-        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+ID_URL,"1")
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+ID_URL,id)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data", is("Shao")))

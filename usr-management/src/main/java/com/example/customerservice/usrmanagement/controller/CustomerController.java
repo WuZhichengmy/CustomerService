@@ -46,8 +46,9 @@ public class CustomerController {
      * @param id
      * @return: ReturnObject
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ReturnObject findCustomerById(@PathParam("id") String id){
+        System.out.println(id);
         CustomerDto dto = this.customerService.findCustomerById(id);
         logger.info("dto: " + dto.toString());
         return new ReturnObject(dto);
