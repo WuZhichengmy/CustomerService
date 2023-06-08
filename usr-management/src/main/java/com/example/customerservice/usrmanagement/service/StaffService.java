@@ -39,11 +39,15 @@ public class StaffService {
         return conversationsByStaffId.getData();
     }
 
-    public StaffDto findStaffById(String id){
+    public StaffDto findStaffById(String id) throws Exception {
         Staff bo = this.staffDao.findStaffById(id);
-        StaffDto dto = StaffDto.builder().id(bo.getId()).username(bo.getUsername())
-                .type(bo.getType()).shopId(bo.getShopId()).conNum(bo.getConNum()).status(bo.getStatus()).build();
-        return dto;
+        if(bo == null){
+            throw new Exception();
+        }else{
+            StaffDto dto = StaffDto.builder().id(bo.getId()).username(bo.getUsername())
+                    .type(bo.getType()).shopId(bo.getShopId()).conNum(bo.getConNum()).status(bo.getStatus()).build();
+            return dto;
+        }
     }
 
     public ReturnObject idleServiceStaff(String id){

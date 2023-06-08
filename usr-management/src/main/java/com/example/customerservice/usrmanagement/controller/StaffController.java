@@ -29,7 +29,7 @@ public class StaffController {
      * @return
      */
     @GetMapping("/{sid}/conversations")
-    public ReturnObject findConversationsByStaffId(@PathParam("sid") String sid,
+    public ReturnObject findConversationsByStaffId(@PathVariable("sid") String sid,
                                                    @RequestParam(defaultValue = "0") Integer page,
                                                    @RequestParam(defaultValue = "10") Integer pageSize ){
         PageDto<ConversationDto> conversationDtoPageDto = this.staffService.findConversationsByStaffId(sid, page, pageSize);
@@ -41,8 +41,8 @@ public class StaffController {
      * @param id
      * @return: ReturnObject
      */
-    @GetMapping("{id}")
-    public ReturnObject findStaffById(@PathParam("id") String id){
+    @GetMapping("/{id}")
+    public ReturnObject findStaffById(@PathVariable("id") String id) throws Exception {
         return new ReturnObject(this.staffService.findStaffById(id));
     }
 
@@ -51,8 +51,8 @@ public class StaffController {
      * @param id
      * @return: ReturnObject
      */
-    @PutMapping("{id}/idle")
-    public ReturnObject idleServiceStaff(@PathParam("id") String id){
+    @PutMapping("/{id}/idle")
+    public ReturnObject idleServiceStaff(@PathVariable("id") String id){
         return this.staffService.idleServiceStaff(id);
     }
 
@@ -61,8 +61,8 @@ public class StaffController {
      * @param id
      * @return: ReturnObject
      */
-    @PutMapping("{id}/busy")
-    public ReturnObject busyServiceStaff(@PathParam("id") String id){
+    @PutMapping("/{id}/busy")
+    public ReturnObject busyServiceStaff(@PathVariable("id") String id){
         return this.staffService.busyServiceStaff(id);
     }
 
@@ -71,8 +71,8 @@ public class StaffController {
      * @param id
      * @return: ReturnObject
      */
-    @GetMapping("{id}/conncnt")
-    public ReturnObject getStaffConnCnt(@PathParam("id") String id){
+    @GetMapping("/{id}/conncnt")
+    public ReturnObject getStaffConnCnt(@PathVariable("id") String id){
         return new ReturnObject(this.staffService.getStaffConnCnt(id));
     }
 
@@ -83,8 +83,8 @@ public class StaffController {
      * @return: ReturnObject
      * @Author: cjr
      */
-    @PutMapping("{id}/conncnt")
-    public ReturnObject putStaffConnCnt(@PathParam("id") String id,
+    @PutMapping("/{id}/conncnt")
+    public ReturnObject putStaffConnCnt(@PathVariable("id") String id,
                                         @RequestParam(defaultValue = "0") Integer conncnt){
         return this.staffService.putStaffConnCnt(id, conncnt);
     }

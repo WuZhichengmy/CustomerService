@@ -39,4 +39,23 @@ public class FileController {
         this.fileService.downloadFile(response, fileName, md5);
         return new ReturnObject(ReturnNo.OK);
     }
+
+    @PostMapping("/uploadBig")
+    public ReturnObject uploadBigFile(@RequestParam("file") MultipartFile file,
+                                      @RequestParam("sender") String senderId,
+                                      @RequestParam("receiver") String receiverId,
+                                      @RequestParam("conversationId") Long conversationId,
+                                      @RequestParam("splitSmallFileSize") Long splitSmallFileSize) throws IOException, NoSuchAlgorithmException {
+        this.fileService.uploadBigFile(file, senderId, receiverId, conversationId, splitSmallFileSize);
+        return new ReturnObject(ReturnNo.OK);
+    }
+
+    @GetMapping("/downloadBig")
+    public ReturnObject downloadBigFile(@RequestParam("filename") String fileName,
+                                        @RequestParam("splitSmallFileSize") long splitSmallFileSize,
+                                        @RequestParam("size") int size,
+                                        HttpServletResponse response) throws IOException {
+        this.fileService.downloadBigFile(response, fileName, splitSmallFileSize, size);
+        return new ReturnObject(ReturnNo.OK);
+    }
 }

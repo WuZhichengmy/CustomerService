@@ -31,7 +31,7 @@ public class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", is("Shao")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.list[0].status", is(1)))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -42,7 +42,7 @@ public class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", is("Shao")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.username", is("Shao")))
                 .andDo(MockMvcResultHandlers.print());
     }
 

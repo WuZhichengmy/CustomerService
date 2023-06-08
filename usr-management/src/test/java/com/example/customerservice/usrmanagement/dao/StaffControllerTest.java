@@ -27,12 +27,12 @@ public class StaffControllerTest {
 
     @Test
     public void findStaffById() throws Exception{
-        String id = "065ba8feeb14288a9c75a36d9961d81a";
+        String id = "022e2106cf4a60f7b0c02b9cac92f060";
         mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + ID_URL, id)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].username", is("Zou")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.username", is("Zou")))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn().getResponse().getContentAsString();
     }
@@ -64,14 +64,14 @@ public class StaffControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", is(566)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.conNum", is(0)))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn().getResponse().getContentAsString();
     }
 
     @Test
     public void putStaffConnCnt() throws Exception{
-        String id = "022e2106cf4a60f7b0c02b9cac92f060";
+        String id = "065ba8feeb14288a9c75a36d9961d81a";
         String body = "{\"conncnt\":599}";
         mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL + CONNCNT_URL, id)
                         .content(body.getBytes("utf-8"))

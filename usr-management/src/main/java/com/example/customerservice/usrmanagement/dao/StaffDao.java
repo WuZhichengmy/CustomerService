@@ -46,12 +46,12 @@ public class StaffDao {
                     .type(staffPo.getType()).shopId(staffPo.getShopId()).conNum(staffPo.getConNum()).status(staffPo.getStatus()).build();
             return staff;
         }
-        return new Staff();
+        return null;
     }
 
     public ReturnObject putStaffStatus(String id, Byte status){
         Optional<StaffPo> po = staffPoMapper.findById(id);
-        logger.debug("po: " + po.get().toString());
+        logger.info("po: " + po.get().toString());
         if(po.isPresent()){
             StaffPo staffPo = po.get();
             staffPo.setStatus(status);
@@ -64,6 +64,7 @@ public class StaffDao {
 
     public ConnCntDto getStaffConnCnt(String id){
         Optional<StaffPo> po = staffPoMapper.findById(id);
+        logger.info("po: " + po.get().toString());
         if(po.isPresent()){
             StaffPo staffPo = po.get();
             return new ConnCntDto(staffPo.getConNum());
@@ -74,6 +75,7 @@ public class StaffDao {
 
     public ReturnObject putStaffConnCnt(String id, Integer conncnt){
         Optional<StaffPo> po = staffPoMapper.findById(id);
+        logger.info("po: " + po.get().toString());
         if(po.isPresent()){
             StaffPo staffPo = po.get();
             staffPo.setConNum(conncnt);
